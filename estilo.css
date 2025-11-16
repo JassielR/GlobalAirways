@@ -1,0 +1,147 @@
+body {
+    background-color: #ebe8e8;
+    width: 100%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/*Barra*/
+#container-fluid{
+    background: #0e134d;
+}
+
+#bar {
+    padding: 0;
+    background: #0e134d;
+}
+
+#barelementos a {
+    height: 100%;
+}
+
+#menu {
+    height: 100%;   
+}
+
+#menu li {
+    transition: background-color 0.1s;
+}
+
+#menu li a{
+    color: #0e134d;
+}
+
+#menu li a:hover{
+    color: #ffffff;
+}
+
+#menu li:hover {
+    background-color: #0a20a1af;
+    border-radius: 10px 10px 0px 0px;
+}
+
+#pad {
+    background-color: #ffffff;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.logo-hover-rotate{
+    transition: transform 0.5s ease;
+}
+
+.logo-hover-rotate:hover {
+    transform: rotate(75deg);
+}
+
+
+/*Formulario*/
+
+.form-control,.form-select {
+    border: 1px solid black !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border: 1px solid black !important;
+    box-shadow: none !important;
+}
+
+.form-check-input {
+    border: 1px solid black !important;
+}
+
+.form-check-input:checked {
+    background-color: black !important;
+    border-color: black !important;
+}
+
+
+
+/*Footer*/
+
+#barrafinal{
+    background-color: #0e134d;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 20px 20px 0px 0px;
+}
+
+#copy{
+    display: flex;
+    align-items: start;
+    color: #f5f6ff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#copy a{
+    width: 40px;
+    height: 40px;
+}
+
+#copy p {
+    padding: 0 20px;
+}
+
+#red li {
+    background-color: #0e134d;
+    margin: 3px;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+#red li:hover {
+    background-color: #ffffff;
+}
+
+#red li a {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+}
+
+#red li a:hover{
+    color: #0e134d;
+}
+
+
+/*Mapa*/
+#formmap {
+    border-radius: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#map {
+    height: 100%;
+}
+
