@@ -8,13 +8,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+
   <style>
     body {
-      background: url('imagenes/alpes.webp') no-repeat center center fixed;
-      background-size: cover;
       margin: 0;
       padding: 0;
-      color: #000;
       font-family: "Poppins", sans-serif;
       min-height: 100vh;
       display: flex;
@@ -22,6 +20,27 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 40px;
+      overflow: hidden;
+      position: relative;
+      background-size: cover;
+    }
+
+    .bg-slide {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: opacity 1.5s ease, transform 6s ease;
+      opacity: 0;
+      z-index: -1;
+    }
+
+    .bg-slide.active {
+      opacity: 1;
+      transform: scale(1.05);
     }
 
     h1 {
@@ -35,9 +54,9 @@
       text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
       flex: 1;
       text-align: left;
-      transition: opacity 0.4s ease;
+      transition: opacity 1s ease;
+      opacity: 0;
     }
-
 
     .login-container {
       background-color: rgb(255, 255, 255);
@@ -56,12 +75,11 @@
       margin-bottom: 25px;
     }
 
-   
     .form-control {
       border-radius: 10px;
       background-color: #001f3f13;
       border: 1px solid #424242;
-      color: white;
+      color: black;
     }
 
     .form-control::placeholder {
@@ -87,7 +105,6 @@
       background-color: #2700b3;
     }
 
-
     .text-muted a {
       color: #002fff;
       text-decoration: none;
@@ -98,7 +115,6 @@
       text-decoration: underline;
     }
 
-
     @media (max-width: 992px) {
       body {
         flex-direction: column;
@@ -107,7 +123,7 @@
       }
 
       h1 {
-        display: none; 
+        display: none;
       }
 
       .login-container {
@@ -126,59 +142,89 @@
         font-size: 1.5rem;
       }
     }
-
-    @keyframes slideInRight {
-      from {
-        opacity: 0;
-        transform: translateX(120px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .animate-title {
-      animation: slideInRight 1.2s ease forwards;
-    }
-
-    .animate-card {
-      animation: fadeUp 1s ease forwards;
-    }
-
   </style>
 </head>
+
 <body>
-  <h1 class="animate-title">Conoce los Alpes Suizos</h1>
+
+  <div class="bg-slide" id="slide1"></div>
+  <div class="bg-slide" id="slide2"></div>
+  <div class="bg-slide" id="slide3"></div>
+  <div class="bg-slide" id="slide4"></div>
+  <div class="bg-slide" id="slide5"></div>
+
+  <h1 id="dynamicTitle">Conoce los Alpes Suizos</h1>
 
   <div class="login-container animate-card">
     <h2 class="mb-5">Busca tu boleto de avión</h2>
+
     <form action="validar.php" method="post">
       <div class="mb-3">
         <label for="nombre" class="form-label">Nombre de usuario</label>
         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu nombre" required>
       </div>
+
       <div class="mb-3">
         <label for="clave" class="form-label">Contraseña</label>
         <input type="password" class="form-control" id="clave" name="clave" placeholder="••••••••" required>
       </div>
-      <button type="submit" class="btn btn-primary mt-5 ">Entrar</button>
+
+      <button type="submit" class="btn btn-primary mt-5">Entrar</button>
     </form>
 
     <p class="text-center text-muted mt-3">
       ¿No tienes un boleto? <a href="reserva.html">Consíguelo aquí</a>
     </p>
   </div>
+
+  <script>
+    const images = [
+      "imagenes/alpes.webp",
+      "imagenes/paisaje2.jpg",
+      "imagenes/paisaje3.jpg",
+      "imagenes/paisaje4.jfif",
+      "imagenes/paisaje5.jpg"
+    ];
+
+    const titles = [
+      "Conoce los Alpes Suizos",
+      "Explora las Montañas Nevadas",
+      "Vive Aventuras Únicas",
+      "Descubre Nuevos Horizontes",
+      "Viaja al Corazón de Europa"
+    ];
+
+    const slides = document.querySelectorAll('.bg-slide');
+    const titleEl = document.getElementById("dynamicTitle");
+
+    let index = 0;
+    let firstRun = true;
+
+    slides.forEach((slide, i) => {
+      slide.style.backgroundImage = `url(${images[i]})`;
+    });
+
+    function changeSlide() {
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[index].classList.add('active');
+
+      if (!firstRun) {
+        titleEl.style.opacity = 0;
+      }
+
+      setTimeout(() => {
+        titleEl.textContent = titles[index];
+        titleEl.style.opacity = 1;
+      }, firstRun ? 0 : 700);
+
+      index = (index + 1) % images.length;
+      firstRun = false;
+    }
+
+    setTimeout(changeSlide, 200);
+
+    setInterval(changeSlide, 4000);
+  </script>
+
 </body>
 </html>
